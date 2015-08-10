@@ -15,8 +15,9 @@ D:\Projets\CrePE\CREPE\CREPE\bin\Debug\Microsoft.Office.Tools.Common.xml
 D:\Projets\CrePE\CREPE\CREPE\bin\Debug\Microsoft.Office.Tools.Outlook.xml
 D:\Projets\CrePE\CREPE\CREPE\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
 D:\Projets\CrePE\CREPE\CREPE\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.xml
-D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.csprojResolveAssemblyReference.cache
 D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.Properties.Resources.resources
+D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.rubanAddConge.resources
 D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.csproj.GenerateResource.Cache
 D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.dll
 D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.pdb
+D:\Projets\CrePE\CREPE\CREPE\obj\Debug\CREPE.csprojResolveAssemblyReference.cache

@@ -7,30 +7,32 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 using System.Windows.Forms;
 
-
-namespace CREPE
+namespace OutlookAddIn1
 {
     public partial class ThisAddIn
     {
+
+        // Outlook.Inspectors inspectors;
+
         Outlook.Explorer currentExplorer = null;
-
-
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            //Outlook.Inspector inspector = new Outlook.Inspector();
             currentExplorer = this.Application.ActiveExplorer();
-            CREPE.rubanAddConge newRuban = new rubanAddConge();
-            newRuban.PerformLayout();
-
+            OutlookAddIn1.rubanAddConge newRuban = new rubanAddConge();
+            //Outlook.Folder deletedFolder = (Outlook.Folder)this.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderDeletedItems);
+            //this.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderDeletedItems)
+            //deletedFolder.Items.ItemAdd += new Outlook.ItemsEvents_ItemAddEventHandler(DeletedItems_ItemAdd);
         }
+
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
             // Remarque : Outlook ne déclenche plus cet événement. Si du code
             //    doit s'exécuter à la fermeture d'Outlook, voir http://go.microsoft.com/fwlink/?LinkId=506785
         }
 
-
-        public void creationDeConge()
+        public void currentExplorer_Event()
         {
             if (this.Application.ActiveExplorer().Selection.Count > 0)
             {
@@ -83,7 +85,6 @@ namespace CREPE
                 }
             }
         }
-
         private void createConge(String nomDemandeur, String dateDebut, String dateFin, String typedeconge)
         {
             //String nomDemandeur = detailsConge.Split(';')[0];
@@ -101,23 +102,6 @@ namespace CREPE
             //nouveauConge.Display(true);
         }
 
-        //private void CreateCustomFolder()
-        //{
-        //    Outlook.Folder inBox = (Outlook.Folder)this.Application.ActiveExplorer().Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderInbox);
-        //    string userName = (string)this.Application.ActiveExplorer().Session.CurrentUser.Name;
-        //    Outlook.Folder customFolder = null;
-        //    try
-        //    {
-        //        customFolder = (Outlook.Folder)inBox.Folders.Add(userName, Outlook.OlDefaultFolders.olFolderInbox);
-        //        MessageBox.Show("You have created a new folder named " + userName + ".");
-        //        inBox.Folders[userName].Display();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("The following error occurred: " + ex.Message);
-        //    }
-        //}
-
 
         #region Code généré par VSTO
 
@@ -131,8 +115,6 @@ namespace CREPE
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
 
-        
-            
-            #endregion
-        }
+        #endregion
     }
+}

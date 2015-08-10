@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 #pragma warning disable 414
-namespace CREPE {
+namespace OutlookAddIn1 {
     
     
     /// 
@@ -227,8 +227,6 @@ namespace CREPE {
                 return _ThisFormRegionCollection;
             }
         }
-
-
     }
     
     /// 
