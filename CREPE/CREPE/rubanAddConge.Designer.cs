@@ -55,8 +55,13 @@
             // 
             // AjoutConge
             // 
+            this.AjoutConge.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.AjoutConge.Description = "Ajoute les informations du congé contenues dans le mail";
+            this.AjoutConge.Image = global::CREPE.Properties.Resources.valise;
             this.AjoutConge.Label = "Ajout des congés";
             this.AjoutConge.Name = "AjoutConge";
+            this.AjoutConge.ScreenTip = "Sélectionner une demande de congé et cliquer pour l\'ajouter au calendrier";
+            this.AjoutConge.ShowImage = true;
             this.AjoutConge.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AjoutConge_Click);
             // 
             // rubanAddConge
