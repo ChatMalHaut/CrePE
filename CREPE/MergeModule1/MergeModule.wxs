@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="MergeModule1" Language="1033" Version="1.0.0.0">
+		<Package Id="77885206-38f6-4b28-ac94-e6d2db2ad268" Manufacturer="" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="MergeRedirectFolder">
+
+				<!-- TODO: Remove the comments around this Component element in order to add resources to this module. -->
+				<!-- <Component Id="ModuleComponent" Guid="20e0efe8-b446-42da-a693-d21c39e9896e"> -->
+					<!-- TODO: Insert files, registry keys, and other resources here. -->
+				<!-- </Component> -->
+
+			</Directory>
+		</Directory>
+	</Module>
+</Wix>

@@ -23,12 +23,7 @@ namespace CREPE
             CREPE.rubanAddConge newRuban = new rubanAddConge();
             newRuban.PerformLayout();
             idducalendar = CreateCustomCalendar();
-            //string todisplay = "";
-            //foreach (Outlook.Folder dossier in currentExplorer.Session.Folders)
-            //{
-            //    todisplay += dossier.Name;
-            //}
-            //MessageBox.Show(todisplay);
+
         }
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
@@ -70,7 +65,7 @@ namespace CREPE
                 foreach (Object selectedObject in this.Application.ActiveExplorer().Selection)
                 {
 
-                    //Object selectedObject = this.Application.ActiveExplorer().Selection[1];
+                    
                     if (selectedObject is Outlook.MailItem)
                     {
                         Outlook.MailItem mailItem = selectedObject as Outlook.MailItem;
@@ -80,6 +75,7 @@ namespace CREPE
                         String Corps = mailItem.Body;
 
                         if (syges == "sygesweb@netapsys.fr" && Sujet.Contains("NETAP"))
+                        //if (syges == "antonin.rousset@netapsys.fr" && Sujet.Contains("NETAP"))
                         {
                             nombreMailValides++;
 
@@ -96,21 +92,12 @@ namespace CREPE
                             DateDebut = DateDebut.Trim();
                             TypeDeConge = TypeDeConge.Trim();
 
-                            // Concaténation des données
-
-                            //String parsed = demandeur; ";" + TypeDeConge + ";" + DateDebut + ";" + DateFin
-
-                            //MessageBox.Show(parsed);
-
                             createConge(Demandeur, DateDebut, DateFin, TypeDeConge);
-
-
 
                         }
 
                         else
                         {
-                            //MessageBox.Show("Ceci n'est pas un mail de congé");
                             nombreMailNonValides++;
                         }
 
@@ -134,39 +121,27 @@ namespace CREPE
 
         private void createConge(String nomDemandeur, String dateDebut, String dateFin, String typedeconge)
         {
-            //String nomDemandeur = detailsConge.Split(';')[0];
-            //String typedeconge = detailsConge.Split(';')[1];
-            //String dateDebut = detailsConge.Split(';')[2];
-            //String dateFin = detailsConge.Split(';')[3];
             Outlook.AppointmentItem nouveauConge = this.Application.Session.GetFolderFromID(idducalendar).Items.Add(Outlook.OlItemType.olAppointmentItem);
-            //   Outlook.AppointmentItem nouveauConge = (Outlook.AppointmentItem)this.Application.CreateItem(Outlook.OlItemType.olAppointmentItem);
             nouveauConge.Subject = "Congé : " + nomDemandeur;
             nouveauConge.Body = "Type du congé : " + typedeconge;
             nouveauConge.Start = DateTime.Parse(dateDebut);
             nouveauConge.End = DateTime.Parse(dateFin + " 12:00 PM");
             nouveauConge.AllDayEvent = true;
             nouveauConge.ReminderSet = false;
+            
             // Recherche du congé (appointment) dans le calendrier
             Outlook.Folder folder = (Outlook.Folder)Globals.ThisAddIn.Application.Session.GetFolderFromID(idducalendar);
 
             string filter = "[Subject] =  'Congé : " + nomDemandeur + "'";
             object obj = folder.Items.Find(filter);
-            /* foreach (Outlook.Folder afolder in this.Application.ActiveExplorer().Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders)
-             {
-                 if (afolder.Name == "Congés collaborateurs")
-                 {
-                     currentExplorer.CurrentFolder = afolder;
-                 }
-             }*/
+
             if (obj != null)
             {
                 //  le congé (appointment) existe déjà
                 Outlook.AppointmentItem appointment = obj as Outlook.AppointmentItem;
-                //MessageBox.Show("Existe : " + appointment.Body + "\n " + appointment.Start);
 
                 if (appointment.Start == nouveauConge.Start || appointment.End == nouveauConge.End)
                 {
-                    //MessageBox.Show("Le congé existe déjà  : " + appointment.Body + "\n " + appointment.Start;
                     appointment.Delete();
 
                     nouveauConge.Save();
@@ -184,22 +159,6 @@ namespace CREPE
             //nouveauConge.Display(true);
         }
 
-        //private void CreateCustomFolder()
-        //{
-        //    Outlook.Folder inBox = (Outlook.Folder)this.Application.ActiveExplorer().Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderInbox);
-        //    string userName = (string)this.Application.ActiveExplorer().Session.CurrentUser.Name;
-        //    Outlook.Folder customFolder = null;
-        //    try
-        //    {
-        //        customFolder = (Outlook.Folder)inBox.Folders.Add(userName, Outlook.OlDefaultFolders.olFolderInbox);
-        //        MessageBox.Show("You have created a new folder named " + userName + ".");
-        //        inBox.Folders[userName].Display();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("The following error occurred: " + ex.Message);
-        //    }
-        //}
 
 
         #region Code généré par VSTO

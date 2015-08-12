@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="CREPE" Language="1036" Version="1.0.0.0" Manufacturer="NETAPSYS" UpgradeCode="a8a73618-fc9f-4d1b-86cd-2c6d21f612d3">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="Une version plus récente de [ProductName] est déjà installée" />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="CREPE" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentRef Id="Registry_FriendlyName" />
+			<ComponentRef Id="Registry_Description" />
+			<ComponentRef Id="Registry_Manifest" />
+			<ComponentRef Id="Registry_LoadBehavior" />
+		</Feature>
+
+		<UIRef Id="WixUI_Minimal" />
+		<WixVariable Id="WixUILicenseRtf" Value="EULA.rtf" />
+
+	</Product>
+	<Fragment>
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="MyExcelAddin" />
+				<Component Id="Registry_FriendlyName">
+					<RegistryValue Id="RegKey_FriendlyName" Root="HKCU"
+								   Key="Software\Microsoft\Office\Outlook\AddIns\CREPE"
+								   Name="FriendlyName"
+								   Value="My Outlook Add-In"
+								   Type="string" KeyPath="yes" />
+				</Component>
+				<Component Id="Registry_Description">
+					<RegistryValue Id="RegKey_Description" Root="HKCU"
+								   Key="Software\Microsoft\Office\Outlook\AddIns\CREPE"
+								   Name="Description"
+								   Value="My very cool Outlook Add-In"
+								   Type="string" KeyPath="yes" />
+				</Component>
+				<Component Id="Registry_Manifest">
+					<RegistryValue Id="RegKey_Manifest" Root="HKCU"
+								   Key="Software\Microsoft\Office\Outlook\AddIns\CREPE"
+								   Name="Manifest" Value="[INSTALLFOLDER]CREPE.vsto|vstolocal"
+								   Type="string" KeyPath="yes" />
+				</Component>
+				<Component Id="Registry_LoadBehavior">
+					<RegistryValue Id="RegKey_LoadBehavior" Root="HKCU"
+								   Key="Software\Microsoft\Office\Outlook\AddIns\CREPE"
+								   Name="LoadBehavior" Value="3"
+								   Type="integer" KeyPath="yes" />
+				</Component>
+			</Directory>
+		</Directory>
+
+	</Fragment>
+
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+			<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+
+			<Component Id="CREPE_vsto_Component">
+				<File Id="CREPE_vsto" KeyPath="yes"
+					  Name="CREPE.vsto" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="MSOfficeToolsCommon_dll_Component">
+				<File Id="MSOfficeToolsCommon_dll" KeyPath="yes"
+					  Name="Microsoft.Office.Tools.Common.v4.0.Utilities.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="MSOfficeToolsOutlook_dll_Component">
+				<File Id="MSOfficeToolsOutlook_dll" KeyPath="yes"
+					  Name="Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="CREPE_dll_manifest_Component">
+				<File Id="CREPE_dll_manifest" KeyPath="yes"
+					  Name="CREPE.dll.manifest" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="CREPE_dll_Component">
+				<File Id="CREPE_dllt" KeyPath="yes"
+					  Name="CREPE.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="Microsoft_Office_Tools_dll_Component">
+				<File Id="Microsoft_Office_Tools_dll" KeyPath="yes"
+					  Name="Microsoft.Office.Tools.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="Microsoft_Office_Tools_Common_dll_Component">
+				<File Id="Microsoft_Office_Tools_Common_dll" KeyPath="yes"
+					  Name="Microsoft.Office.Tools.Common.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="Microsoft_Office_Tools_Outlook_dll_Component">
+				<File Id="Microsoft_Office_Tools_Outlook_dll" KeyPath="yes"
+					  Name="Microsoft.Office.Tools.Outlook.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="Microsoft_Office_Tools_v40_Framework__dllComponent">
+				<File Id="Microsoft_Office_Tools_v40_Framework_dll" KeyPath="yes"
+					  Name="Microsoft.Office.Tools.v4.0.Framework.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+			<Component Id="Microsoft_VisualStudio_Tools_Applications_Runtime_dll_Component">
+				<File Id="Microsoft_VisualStudio_Tools_Applications_Runtime_dll" KeyPath="yes"
+					  Name="Microsoft.VisualStudio.Tools.Applications.Runtime.dll" Source="$(var.AddinFiles)"></File>
+			</Component>
+
+		</ComponentGroup>
+	</Fragment>
+
+
+
+</Wix>
